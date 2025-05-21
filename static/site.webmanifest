@@ -2,8 +2,6 @@
 {
   "name": "Alex.AI - AI Developer Portfolio",
   "short_name": "Alex.AI",
-  "description": "Portfolio of Alex Chen, AI Developer & Machine Learning Engineer",
-  "start_url": "/",
   "icons": [
     {
       "src": "/static/favicon.ico",
@@ -12,6 +10,6 @@
     }
   ],
   "theme_color": "#8B5CF6",
-  "background_color": "#0A0A0A",
+  "background_color": "#121212",
   "display": "standalone"
 }

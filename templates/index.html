@@ -1,80 +1,31 @@
-{% extends "base.html" %}
-{% block content %}
-  <!-- Loading Screen -->
-  <div id="loading-screen" class="fixed inset-0 bg-background z-50 flex flex-col items-center justify-center">
-    <div class="text-4xl font-bold text-gradient mb-8">Alex.AI</div>
-    <div class="w-64 h-1 bg-secondary rounded-full overflow-hidden">
-      <div id="progress-bar" class="h-full bg-primary rounded-full"></div>
+
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alex.AI | AI Developer Portfolio</title>
+    <meta name="description" content="Portfolio of Alex Chen, AI Developer & Machine Learning Engineer">
+    <meta name="theme-color" content="#8B5CF6">
+    <link rel="manifest" href="{{ url_for('static', filename='site.webmanifest') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="fixed inset-0 bg-background z-50 flex flex-col items-center justify-center">
+        <div class="text-4xl font-bold text-gradient mb-8">Alex.AI</div>
+        <div class="w-64 h-1 bg-secondary rounded-full overflow-hidden">
+            <div id="progress-bar" class="h-full bg-primary rounded-full"></div>
+        </div>
+        <div id="loading-text" class="mt-4 text-sm text-muted-foreground">Loading...</div>
     </div>
-    <div id="loading-text" class="mt-4 text-sm text-muted-foreground">Loading...</div>
-  </div>
-  
-  <!-- Background Effects -->
-  <div class="fixed inset-0 -z-50 overflow-hidden pointer-events-none">
-    <div class="absolute inset-0 bg-gradient"></div>
-    <div class="grid-overlay"></div>
     
-    <!-- Animated "stars" -->
-    <div class="star star-1"></div>
-    <div class="star star-2"></div>
-    <div class="star star-3"></div>
-    <div class="star star-4"></div>
-  </div>
-  
-  <!-- Navbar -->
-  <header id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 py-4">
-    <div class="container mx-auto px-4 flex justify-between items-center">
-      <a href="#" class="text-xl font-bold text-gradient">Alex.AI</a>
-      
-      <!-- Desktop Navigation -->
-      <nav class="hidden md:flex items-center gap-8">
-        <a href="#home" class="nav-link flex items-center gap-2">
-          <i class="bi bi-house"></i>
-          Home
-        </a>
-        <a href="#about" class="nav-link flex items-center gap-2">
-          <i class="bi bi-person"></i>
-          About
-        </a>
-        <a href="#skills" class="nav-link flex items-center gap-2">
-          <i class="bi bi-code-slash"></i>
-          Skills
-        </a>
-        <a href="#projects" class="nav-link flex items-center gap-2">
-          <i class="bi bi-briefcase"></i>
-          Projects
-        </a>
-        <a href="#contact" class="nav-link flex items-center gap-2">
-          <i class="bi bi-chat-square-text"></i>
-          Contact
-        </a>
-      </nav>
-      
-      <!-- Social Icons - Desktop -->
-      <div class="hidden md:flex items-center gap-4">
-        <a href="https://github.com" target="_blank" rel="noopener noreferrer" 
-           class="text-muted-foreground hover:text-primary transition-colors">
-          <i class="bi bi-github"></i>
-        </a>
-        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" 
-           class="text-muted-foreground hover:text-primary transition-colors">
-          <i class="bi bi-linkedin"></i>
-        </a>
-        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" 
-           class="text-muted-foreground hover:text-primary transition-colors">
-          <i class="bi bi-twitter-x"></i>
-        </a>
-        <button class="btn btn-outline ml-2">Resume</button>
-      </div>
-      
-      <!-- Mobile Menu Button -->
-      <button 
-        id="mobile-menu-btn"
-        class="md:hidden text-foreground"
-      >
-        <i class="bi bi-list" id="menu-icon"></i>
-        <i class="bi bi-x hidden" id="close-icon"></i>
-      </button>
+    <!-- Background Effects -->
+    <div class="fixed inset-0 -z-50 overflow-hidden pointer-events-none">
         <div class="absolute inset-0 bg-gradient"></div>
         <div class="grid-overlay"></div>
         
