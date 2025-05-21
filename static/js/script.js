@@ -1,43 +1,50 @@
 
 document.addEventListener('DOMContentLoaded', function() {
   // Set current year in footer
-  document.getElementById('current-year').textContent = new Date().getFullYear();
+  const currentYearElement = document.getElementById('current-year');
+  if (currentYearElement) {
+    currentYearElement.textContent = new Date().getFullYear();
+  }
   
   // Loading screen logic
   const loadingScreen = document.getElementById('loading-screen');
   const progressBar = document.getElementById('progress-bar');
   const loadingText = document.getElementById('loading-text');
   
-  let progress = 0;
-  const interval = setInterval(() => {
-    progress += 5;
-    progressBar.style.width = `${progress}%`;
-    
-    if (progress >= 100) {
-      clearInterval(interval);
-      loadingText.textContent = 'Welcome!';
+  if (loadingScreen && progressBar && loadingText) {
+    let progress = 0;
+    const interval = setInterval(() => {
+      progress += 5;
+      progressBar.style.width = `${progress}%`;
       
-      setTimeout(() => {
-        loadingScreen.style.opacity = '0';
-        loadingScreen.style.pointerEvents = 'none';
-      }, 500);
-    }
-  }, 100);
+      if (progress >= 100) {
+        clearInterval(interval);
+        loadingText.textContent = 'Welcome!';
+        
+        setTimeout(() => {
+          loadingScreen.style.opacity = '0';
+          loadingScreen.style.pointerEvents = 'none';
+        }, 500);
+      }
+    }, 100);
+  }
   
   // Navbar scroll effect
   const navbar = document.getElementById('navbar');
   
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-      navbar.classList.add('glass-morphism');
-      navbar.classList.remove('py-4');
-      navbar.classList.add('py-2');
-    } else {
-      navbar.classList.remove('glass-morphism');
-      navbar.classList.add('py-4');
-      navbar.classList.remove('py-2');
-    }
-  });
+  if (navbar) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add('glass-morphism');
+        navbar.classList.remove('py-4');
+        navbar.classList.add('py-2');
+      } else {
+        navbar.classList.remove('glass-morphism');
+        navbar.classList.add('py-4');
+        navbar.classList.remove('py-2');
+      }
+    });
+  }
   
   // Mobile menu toggle
   const mobileMenuBtn = document.getElementById('mobile-menu-btn');
@@ -45,54 +52,60 @@ document.addEventListener('DOMContentLoaded', function() {
   const menuIcon = document.getElementById('menu-icon');
   const closeIcon = document.getElementById('close-icon');
   
-  mobileMenuBtn.addEventListener('click', () => {
-    mobileMenu.classList.toggle('hidden');
-    menuIcon.classList.toggle('hidden');
-    closeIcon.classList.toggle('hidden');
-  });
-  
-  // Close mobile menu when clicking a link
-  const mobileLinks = document.querySelectorAll('.mobile-link');
-  
-  mobileLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      mobileMenu.classList.add('hidden');
-      menuIcon.classList.remove('hidden');
-      closeIcon.classList.add('hidden');
+  if (mobileMenuBtn && mobileMenu && menuIcon && closeIcon) {
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+      menuIcon.classList.toggle('hidden');
+      closeIcon.classList.toggle('hidden');
     });
-  });
+    
+    // Close mobile menu when clicking a link
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+    
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        menuIcon.classList.remove('hidden');
+        closeIcon.classList.add('hidden');
+      });
+    });
+  }
   
   // Scroll to top button
   const scrollToTopBtn = document.getElementById('scroll-to-top');
   
-  scrollToTopBtn.addEventListener('click', () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
+  if (scrollToTopBtn) {
+    scrollToTopBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
     });
-  });
+  }
   
   // Fade-in animation on scroll
   const animateElements = document.querySelectorAll('.animate-fade-in');
   
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = '1';
-        entry.target.style.transform = 'translateY(0)';
-        observer.unobserve(entry.target);
-      }
+  if (animateElements.length > 0) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1
     });
-  }, {
-    threshold: 0.1
-  });
-  
-  animateElements.forEach(element => {
-    element.style.opacity = '0';
-    element.style.transform = 'translateY(20px)';
-    element.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
-    observer.observe(element);
-  });
+    
+    animateElements.forEach(element => {
+      element.style.opacity = '0';
+      element.style.transform = 'translateY(20px)';
+      element.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
+      observer.observe(element);
+    });
+  }
   
   // Projects section
   const projects = [
@@ -169,6 +182,8 @@ document.addEventListener('DOMContentLoaded', function() {
   let activeCategory = "All";
 
   function renderProjects() {
+    if (!projectsGrid) return;
+    
     projectsGrid.innerHTML = '';
     
     const filteredProjects = activeCategory === "All" 
@@ -222,9 +237,61 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Category buttons
   const categoryButtons = document.querySelectorAll('.category-btn');
-  categoryButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      activeCategory = button.dataset.category;
+  if (categoryButtons.length > 0) {
+    categoryButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        activeCategory = button.dataset.category;
+        
+        // Update buttons
+        categoryButtons.forEach(btn => {
+          if (btn.dataset.category === activeCategory) {
+            btn.classList.remove('btn-outline');
+            btn.classList.add('btn-primary');
+          } else {
+            btn.classList.add('btn-outline');
+            btn.classList.remove('btn-primary');
+          }
+        });
+        
+        renderProjects();
+      });
+    });
+  }
+
+  // Contact form
+  const contactForm = document.getElementById('contact-form');
+  const formSuccess = document.getElementById('form-success');
+  const submitButton = document.getElementById('submit-button');
+  
+  if (contactForm && formSuccess && submitButton) {
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      // Simulate form submission
+      submitButton.textContent = 'Sending...';
+      submitButton.disabled = true;
+      
+      setTimeout(() => {
+        contactForm.classList.add('hidden');
+        formSuccess.classList.remove('hidden');
+        
+        // Reset form after 3 seconds
+        setTimeout(() => {
+          contactForm.reset();
+          submitButton.innerHTML = '<i class="bi bi-send"></i> Send Message';
+          submitButton.disabled = false;
+          formSuccess.classList.add('hidden');
+          contactForm.classList.remove('hidden');
+        }, 3000);
+      }, 1500);
+    });
+  }
+
+  // View all projects button
+  const viewAllProjectsBtn = document.getElementById('view-all-projects');
+  if (viewAllProjectsBtn) {
+    viewAllProjectsBtn.addEventListener('click', () => {
+      activeCategory = "All";
       
       // Update buttons
       categoryButtons.forEach(btn => {
@@ -239,55 +306,9 @@ document.addEventListener('DOMContentLoaded', function() {
       
       renderProjects();
     });
-  });
-
-  // Contact form
-  const contactForm = document.getElementById('contact-form');
-  const formSuccess = document.getElementById('form-success');
-  const submitButton = document.getElementById('submit-button');
+  }
   
-  contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    
-    // Simulate form submission
-    submitButton.textContent = 'Sending...';
-    submitButton.disabled = true;
-    
-    setTimeout(() => {
-      contactForm.classList.add('hidden');
-      formSuccess.classList.remove('hidden');
-      
-      // Reset form after 3 seconds
-      setTimeout(() => {
-        contactForm.reset();
-        submitButton.innerHTML = '<i class="bi bi-send"></i> Send Message';
-        submitButton.disabled = false;
-        formSuccess.classList.add('hidden');
-        contactForm.classList.remove('hidden');
-      }, 3000);
-    }, 1500);
-  });
-
-  // View all projects button
-  const viewAllProjectsBtn = document.getElementById('view-all-projects');
-  viewAllProjectsBtn.addEventListener('click', () => {
-    activeCategory = "All";
-    
-    // Update buttons
-    categoryButtons.forEach(btn => {
-      if (btn.dataset.category === activeCategory) {
-        btn.classList.remove('btn-outline');
-        btn.classList.add('btn-primary');
-      } else {
-        btn.classList.add('btn-outline');
-        btn.classList.remove('btn-primary');
-      }
-    });
-    
-    renderProjects();
-  });
-  
-  // Mock API calls to Flask backend
+  // API calls to Flask backend
   const logVisit = async () => {
     try {
       const response = await fetch('/api/log-visit', {
@@ -299,7 +320,9 @@ document.addEventListener('DOMContentLoaded', function() {
       
       if (response.ok) {
         console.log('Visit logged successfully');
-        getVisitorCount();
+        await getVisitorCount();
+      } else {
+        console.error('Error logging visit: Server returned', response.status);
       }
     } catch (error) {
       console.error('Error logging visit:', error);
@@ -312,6 +335,8 @@ document.addEventListener('DOMContentLoaded', function() {
       if (response.ok) {
         const data = await response.json();
         console.log(`Total visitors: ${data.count}`);
+      } else {
+        console.error('Error getting visitor count: Server returned', response.status);
       }
     } catch (error) {
       console.error('Error getting visitor count:', error);
