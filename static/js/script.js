@@ -59,18 +59,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const menuIcon = document.getElementById('menu-icon');
     const closeIcon = document.getElementById('close-icon');
 
-    mobileMenuBtn.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
-        menuIcon.classList.toggle('hidden');
-        closeIcon.classList.toggle('hidden');
-    });
+    if (mobileMenuBtn) {
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            menuIcon.classList.toggle('hidden');
+            closeIcon.classList.toggle('hidden');
+        });
+    }
 
     // Close mobile menu when clicking a link
     document.querySelectorAll('.mobile-link').forEach(link => {
         link.addEventListener('click', () => {
-            mobileMenu.classList.add('hidden');
-            menuIcon.classList.remove('hidden');
-            closeIcon.classList.add('hidden');
+            if (mobileMenu && menuIcon && closeIcon) {
+                mobileMenu.classList.add('hidden');
+                menuIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+            }
         });
     });
 
@@ -87,157 +91,190 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Project category filtering
-    const categoryButtons = document.querySelectorAll('.category-btn');
-    const projectsGrid = document.getElementById('projects-grid');
-    
-    if (categoryButtons.length > 0 && projectsGrid) {
-        // Sample projects data
-        const projects = [
-            {
-                title: "Neural Network Framework",
-                description: "A lightweight neural network library built from scratch",
-                category: "Machine Learning",
-                image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2668&q=80",
-                tags: ["Python", "TensorFlow", "Deep Learning"]
-            },
-            {
-                title: "Sentiment Analysis API",
-                description: "RESTful API for real-time sentiment analysis",
-                category: "NLP",
-                image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
-                tags: ["Flask", "NLP", "API Design"]
-            },
-            {
-                title: "Object Detection System",
-                description: "Real-time object detection for surveillance systems",
-                category: "Computer Vision",
-                image: "https://images.unsplash.com/photo-1567361808960-dec9cb578182?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
-                tags: ["Python", "OpenCV", "YOLO"]
-            },
-            {
-                title: "Stock Prediction Model",
-                description: "LSTM-based model for stock market prediction",
-                category: "Data Science",
-                image: "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
-                tags: ["Python", "Keras", "Time Series"]
-            },
-            {
-                title: "Chatbot Framework",
-                description: "Customizable framework for building intelligent chatbots",
-                category: "NLP",
-                image: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1964&q=80",
-                tags: ["Python", "BERT", "Flask"]
-            },
-            {
-                title: "Healthcare Data Analytics",
-                description: "Machine learning for patient outcome prediction",
-                category: "Data Science",
-                image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
-                tags: ["Python", "scikit-learn", "Pandas"]
-            }
-        ];
+    // Add current year to footer
+    const yearElem = document.getElementById('current-year');
+    if (yearElem) {
+        yearElem.textContent = new Date().getFullYear();
+    }
+
+    // Projects data
+    const projects = [
+        {
+            title: "Neural Language Model",
+            category: "NLP",
+            image: "https://images.unsplash.com/photo-1677442136019-21780ecad994",
+            description: "Advanced language understanding model with state-of-the-art performance on multiple benchmarks.",
+            technologies: ["PyTorch", "Transformers", "CUDA"],
+            link: "#"
+        },
+        {
+            title: "Computer Vision Pipeline",
+            category: "Computer Vision",
+            image: "https://images.unsplash.com/photo-1633412802994-5c058f151b66",
+            description: "Real-time object detection and classification system for industrial applications.",
+            technologies: ["TensorFlow", "OpenCV", "Docker"],
+            link: "#"
+        },
+        {
+            title: "Predictive Analytics Dashboard",
+            category: "Data Science",
+            image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71",
+            description: "Business intelligence platform with ML-driven forecasting capabilities.",
+            technologies: ["Scikit-learn", "Pandas", "Plotly"],
+            link: "#"
+        },
+        {
+            title: "Reinforcement Learning Agent",
+            category: "Machine Learning",
+            image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485",
+            description: "Self-learning AI agent for optimizing complex systems through deep reinforcement learning.",
+            technologies: ["TensorFlow", "Gym", "Ray"],
+            link: "#"
+        },
+        {
+            title: "Sentiment Analysis API",
+            category: "NLP",
+            image: "https://images.unsplash.com/photo-1516110833967-0b5716ca1387",
+            description: "Real-time sentiment analysis of text data with high accuracy across multiple languages.",
+            technologies: ["BERT", "FastAPI", "Redis"],
+            link: "#"
+        },
+        {
+            title: "Medical Image Diagnosis",
+            category: "Computer Vision",
+            image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef",
+            description: "Deep learning system for automated analysis of medical imaging to assist diagnosticians.",
+            technologies: ["PyTorch", "U-Net", "DICOM"],
+            link: "#"
+        }
+    ];
+
+    // Populate projects grid
+    const populateProjects = (filteredProjects) => {
+        const projectsGrid = document.getElementById('projects-grid');
+        if (!projectsGrid) return;
         
-        // Initialize with all projects
-        renderProjects(projects);
+        projectsGrid.innerHTML = '';
         
-        // Add event listeners to filter buttons
-        categoryButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const category = button.getAttribute('data-category');
-                
-                // Update active button
-                categoryButtons.forEach(btn => {
-                    btn.classList.remove('btn-primary');
-                    btn.classList.add('btn-outline');
-                });
-                button.classList.remove('btn-outline');
-                button.classList.add('btn-primary');
-                
-                // Filter projects
-                const filteredProjects = category === 'All' 
-                    ? projects 
-                    : projects.filter(project => project.category === category);
-                
-                renderProjects(filteredProjects);
-            });
-        });
-        
-        // Function to render projects
-        function renderProjects(projectsToRender) {
-            projectsGrid.innerHTML = '';
+        filteredProjects.forEach((project, index) => {
+            const projectCard = document.createElement('div');
+            projectCard.className = 'card glass-morphism hover-card animate-fade-in overflow-hidden';
+            projectCard.style.animationDelay = `${index * 100}ms`;
             
-            projectsToRender.forEach((project, index) => {
-                const projectCard = document.createElement('div');
-                projectCard.className = 'card glass-morphism overflow-hidden hover-card animate-fade-in';
-                projectCard.style.animationDelay = `${index * 100}ms`;
-                
-                const tags = project.tags.map(tag => 
-                    `<span class="px-2 py-1 bg-primary/10 rounded-full text-xs">${tag}</span>`
-                ).join('');
-                
-                projectCard.innerHTML = `
-                    <div class="relative">
-                        <img 
-                            src="${project.image}" 
-                            alt="${project.title}" 
-                            class="w-full h-48 object-cover"
-                        >
-                        <span class="absolute top-2 right-2 bg-primary/90 text-white px-3 py-1 rounded-full text-xs">
+            projectCard.innerHTML = `
+                <div class="relative aspect-video">
+                    <img 
+                        src="${project.image}" 
+                        alt="${project.title}" 
+                        class="w-full h-full object-cover"
+                    >
+                    <div class="absolute top-4 left-4">
+                        <span class="px-3 py-1 bg-primary/80 text-primary-foreground text-xs rounded-full">
                             ${project.category}
                         </span>
                     </div>
-                    <div class="p-5">
-                        <h3 class="text-lg font-semibold mb-2">${project.title}</h3>
-                        <p class="text-muted-foreground text-sm mb-4">${project.description}</p>
-                        <div class="flex flex-wrap gap-2">
-                            ${tags}
-                        </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold mb-2">${project.title}</h3>
+                    <p class="text-muted-foreground mb-4">${project.description}</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        ${project.technologies.map(tech => 
+                            `<span class="px-2 py-1 text-xs bg-secondary text-foreground rounded-full">${tech}</span>`
+                        ).join('')}
                     </div>
-                `;
-                
-                projectsGrid.appendChild(projectCard);
+                    <a 
+                        href="${project.link}" 
+                        class="text-primary hover:underline inline-flex items-center"
+                    >
+                        View Project <i class="bi bi-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            `;
+            
+            projectsGrid.appendChild(projectCard);
+        });
+    };
+
+    // Initialize projects
+    populateProjects(projects);
+
+    // Handle category filter buttons
+    const categoryButtons = document.querySelectorAll('.category-btn');
+    categoryButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Update active button style
+            categoryButtons.forEach(btn => {
+                btn.classList.remove('btn-primary');
+                btn.classList.add('btn-outline');
             });
-        }
+            button.classList.remove('btn-outline');
+            button.classList.add('btn-primary');
+            
+            // Filter projects
+            const category = button.getAttribute('data-category');
+            const filteredProjects = category === 'All' 
+                ? projects 
+                : projects.filter(project => project.category === category);
+                
+            populateProjects(filteredProjects);
+        });
+    });
+
+    // View all projects button
+    const viewAllBtn = document.getElementById('view-all-projects');
+    if (viewAllBtn) {
+        viewAllBtn.addEventListener('click', () => {
+            // Reset category filter
+            categoryButtons.forEach(btn => {
+                if (btn.getAttribute('data-category') === 'All') {
+                    btn.classList.remove('btn-outline');
+                    btn.classList.add('btn-primary');
+                } else {
+                    btn.classList.remove('btn-primary');
+                    btn.classList.add('btn-outline');
+                }
+            });
+            
+            populateProjects(projects);
+            
+            // Scroll to projects section
+            document.getElementById('projects').scrollIntoView({ behavior: 'smooth' });
+        });
     }
 
-    // Contact form handling
+    // Contact form submission
     const contactForm = document.getElementById('contact-form');
     const formSuccess = document.getElementById('form-success');
-    const submitButton = document.getElementById('submit-button');
     
     if (contactForm) {
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
             
             // Simulate form submission
-            submitButton.disabled = true;
-            submitButton.innerHTML = '<i class="bi bi-hourglass"></i> Sending...';
+            const submitButton = document.getElementById('submit-button');
+            if (submitButton) {
+                submitButton.innerHTML = '<i class="bi bi-hourglass-split"></i> Sending...';
+                submitButton.disabled = true;
+            }
             
             setTimeout(() => {
                 contactForm.style.display = 'none';
-                formSuccess.classList.remove('hidden');
+                if (formSuccess) formSuccess.classList.remove('hidden');
             }, 1500);
         });
     }
 
-    // Set current year in footer
-    const currentYearElement = document.getElementById('current-year');
-    if (currentYearElement) {
-        currentYearElement.textContent = new Date().getFullYear().toString();
-    }
-
     // Scroll to top button
-    const scrollToTopButton = document.getElementById('scroll-to-top');
-    if (scrollToTopButton) {
-        scrollToTopButton.addEventListener('click', () => {
+    const scrollToTopBtn = document.getElementById('scroll-to-top');
+    if (scrollToTopBtn) {
+        scrollToTopBtn.addEventListener('click', () => {
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
             });
         });
     }
-
+    
     // Visitor counter
     fetch('/api/visitors')
         .then(response => response.json())
@@ -250,5 +287,5 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         })
-        .catch(error => console.error('Error with visitor counter:', error));
+        .catch(console.error);
 });
