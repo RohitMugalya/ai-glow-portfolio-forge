@@ -1,12 +1,9 @@
 
 # Alex.AI - AI Developer Portfolio
 
-A portfolio website for an AI Developer using Flask, HTML, CSS, and JavaScript.
+A portfolio website for an AI Developer using HTML, CSS, and JavaScript.
 
 ## Tech Stack
-
-**Backend:**
-- Python Flask
 
 **Frontend:**
 - HTML
@@ -28,38 +25,19 @@ A portfolio website for an AI Developer using Flask, HTML, CSS, and JavaScript.
 ## Project Structure
 
 ```
-├── app.py                 # Flask application
-├── requirements.txt       # Python dependencies
-├── vercel.json            # Vercel deployment configuration
-├── templates/             # HTML templates
-│   └── index.html         # Main HTML template
+├── index.html             # Main HTML file
 ├── static/                # Static files
 │   ├── css/               # CSS files
 │   │   └── style.css      # Main stylesheet
 │   ├── js/                # JavaScript files
-│   │   └── script.js      # Main JavaScript file
+│   │   └── main.js        # Main JavaScript file
 │   └── site.webmanifest   # Web app manifest
 └── README.md              # Project documentation
 ```
 
 ## How to Run
 
-1. Make sure you have Python installed (Python 3.6 or higher recommended)
-
-2. Install Flask if you haven't already:
-```
-pip install -r requirements.txt
-```
-
-3. Run the Flask application:
-```
-python app.py
-```
-
-4. Open your browser and navigate to:
-```
-http://127.0.0.1:5000/
-```
+Simply open the `index.html` file in your browser.
 
 ## Deployment
 

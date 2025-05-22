@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize Lucide icons
     lucide.createIcons();
@@ -89,17 +90,30 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Visitor counter
-    fetch('/api/visitors')
-        .then(response => response.json())
-        .then(data => {
-            // Log the visit
-            fetch('/api/log-visit', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-        })
-        .catch(console.error);
+    // Initialize skill bars with animation
+    const skillBars = document.querySelectorAll('.skill-progress');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Get the width from the style attribute or data attribute
+                const width = entry.target.style.width;
+                // First set width to 0
+                entry.target.style.width = '0';
+                // Then animate to the target width
+                setTimeout(() => {
+                    entry.target.style.width = width;
+                }, 100);
+                // Unobserve after animation
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.2 });
+
+    skillBars.forEach(bar => {
+        // Set initial width to 0
+        const targetWidth = bar.style.width;
+        bar.style.width = '0';
+        observer.observe(bar);
+    });
 });
