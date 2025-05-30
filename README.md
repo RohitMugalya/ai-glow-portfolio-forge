@@ -1,48 +1,48 @@
 
 # Alex.AI - AI Developer Portfolio
 
-A portfolio website for an AI Developer using HTML, CSS, and JavaScript.
-
-## Tech Stack
-
-**Frontend:**
-- HTML
-- CSS 
-- JavaScript
-- Bootstrap Icons
+A modern, responsive portfolio website for an AI Developer built with React, TypeScript, and Tailwind CSS.
 
 ## Features
 
-- Responsive design
-- Dark mode
-- Loading screen with progress bar
-- Smooth scrolling
-- Fade-in animations
-- Mobile-friendly navigation
-- Glass morphism effects
-- Hover effects
+- 🎨 Modern and clean design
+- 📱 Fully responsive
+- ⚡ Fast and optimized
+- 🎭 Smooth animations
+- 🎯 Type-safe with TypeScript
+- 🎨 Styled with Tailwind CSS
 
-## Project Structure
+## Tech Stack
 
-```
-├── index.html             # Main HTML file
-├── static/                # Static files
-│   ├── css/               # CSS files
-│   │   └── style.css      # Main stylesheet
-│   ├── js/                # JavaScript files
-│   │   └── main.js        # Main JavaScript file
-│   └── site.webmanifest   # Web app manifest
-└── README.md              # Project documentation
-```
+- **Frontend:** React 18, TypeScript
+- **Styling:** Tailwind CSS
+- **Icons:** Lucide React
+- **Build Tool:** Vite
+- **Routing:** React Router DOM
 
-## How to Run
+## Sections
 
-Simply open the `index.html` file in your browser.
+- Hero/Landing
+- About Me
+- Skills
+- Projects
+- Contact
 
-## Deployment
+## Getting Started
 
-This project is configured for deployment on Vercel with the included `vercel.json` file.
+1. Clone the repository
+2. Install dependencies: `npm install`
+3. Start development server: `npm run dev`
+4. Build for production: `npm run build`
+
+## Customization
+
+Edit the components in `src/components/` to customize:
+- Personal information
+- Skills and experience
+- Project portfolio
+- Contact details
 
 ## License
 
-This project is open source and available under the [MIT License](LICENSE).
+MIT License - feel free to use this template for your own portfolio!
